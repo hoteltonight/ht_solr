@@ -1,8 +1,5 @@
 #!/bin/sh
 #
-# This script starts and stops the solr server
-# This script belongs in /engineyard/bin/solr
-#
 
 deps() {
   echo "Y u no specify HT_HOME?"
