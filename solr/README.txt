@@ -13,70 +13,51 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Solr example
-------------
 
-This directory contains an instance of the Jetty Servlet container setup to 
-run Solr using an example configuration.
+Example Solr Home Directory
+=============================
 
-To run this example:
+This directory is provided as an example of what a "Solr Home" directory
+should look like.
 
-  java -jar start.jar
+It's not strictly necessary that you copy all of the files in this
+directory when setting up a new instance of Solr, but it is recommended.
 
-in this example directory, and when Solr is started connect to 
 
-  http://localhost:8983/solr/
+Basic Directory Structure
+-------------------------
 
-To add documents to the index, use the post.jar (or post.sh script) in
-the example/exampledocs subdirectory (while Solr is running), for example:
+The Solr Home directory typically contains the following...
 
-     cd exampledocs
-     java -jar post.jar *.xml
-Or:  sh post.sh *.xml
+* solr.xml *
 
-For more information about this example please read...
+This is the primary configuration file Solr looks for when starting.
+This file specifies the list of "SolrCores" it should load, and high 
+level configuration options that should be used for all SolrCores.
 
- * example/solr/README.txt
-   For more information about the "Solr Home" and Solr specific configuration
- * http://lucene.apache.org/solr/tutorial.html
-   For a Tutorial using this example configuration
- * http://wiki.apache.org/solr/SolrResources 
-   For a list of other tutorials and introductory articles.
+Please see the comments in ./solr.xml for more details.
 
-Notes About These Examples
---------------------------
+If no solr.xml file is found, then Solr assumes that there should be
+a single SolrCore named "collection1" and that the "Instance Directory" 
+for collection1 should be the same as the Solr Home Directory.
 
-* SolrHome *
+* Individual SolrCore Instance Directories *
 
-By default, start.jar starts Solr in Jetty using the default Solr Home
-directory of "./solr/" (relative to the working directory of hte servlet 
-container).  To run other example configurations, you can specify the 
-solr.solr.home system property when starting jetty...
+Although solr.xml can be configured to look for SolrCore Instance Directories 
+in any path, simple sub-directories of the Solr Home Dir using relative paths 
+are common for many installations.  In this directory you can see the 
+"./collection1" Instance Directory.
 
-  java -Dsolr.solr.home=multicore -jar start.jar
-  java -Dsolr.solr.home=example-DIH/solr -jar start.jar
+* A Shared 'lib' Directory *
 
-* References to Jar Files Outside This Directory *
+Although solr.xml can be configured with an optional "sharedLib" attribute 
+that can point to any path, it is common to use a "./lib" sub-directory of the 
+Solr Home Directory.
 
-Various example SolrHome dirs contained in this directory may use "<lib>"
-statements in the solrconfig.xml file to reference plugin jars outside of 
-this directory for loading "contrib" plugins via relative paths.  
+* ZooKeeper Files *
 
-If you make a copy of this example server and wish to use the 
-ExtractingRequestHandler (SolrCell), DataImportHandler (DIH), UIMA, the 
-clustering component, or any other modules in "contrib", you will need to 
-copy the required jars or update the paths to those jars in your 
-solrconfig.xml.
+When using SolrCloud using the embedded ZooKeeper option for Solr, it is 
+common to have a "zoo.cfg" file and "zoo_data" directories in the Solr Home 
+Directory.  Please see the SolrCloud wiki page for more details...
 
-* Logging *
-
-By default, Jetty & Solr will log to the console. This can be convenient when 
-first getting started, but eventually you will want to log to a file. To 
-configure logging, you can just pass a system property to Jetty on startup:
-
-  java -Djava.util.logging.config.file=etc/logging.properties -jar start.jar
- 
-This will use Java Util Logging to log to a file based on the config in
-etc/logging.properties. Logs will be written in the logs directory. It is
-also possible to setup log4j or other popular logging frameworks.
-
+https://wiki.apache.org/solr/SolrCloud
