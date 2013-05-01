@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# This script starts and stops the solr server
+# This script belongs in /engineyard/bin/solr
+#
+
+deps() {
+  echo "Y u no specify HT_HOME?"
+  echo "export HT_HOME=/path/to/rails/app"
+  echo "\nor\n"
+  echo "HT_HOME=/path/to/app htsolr"
+  exit 1
+}
+
+if [ -z "$HT_HOME" ]; then deps; fi
+
+java -Djava.net.preferIPv4Stack=true -Dsolr.solr.home="$HT_HOME/solr" -jar start.jar
+
