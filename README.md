@@ -10,5 +10,5 @@ Current entensions:
 
 ## Starting Solr
 ```
-export HT_HOME=/path/to/rails/app ./htsolr
+HT_HOME=/path/to/rails/app ./htsolr
 ```
