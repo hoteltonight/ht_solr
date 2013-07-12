@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>org.apache.Solr</string>
+  <key>OnDemand</key>
+  <true/>
+  <key>WorkingDirectory</key>
+  <string>/path/to/ht_solr/repo</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/java</string>
+    <string>-Dsolr.solr.home=/path/to/hotelstonight/repo/solr/directory</string>
+    <string>-Djava.net.preferIPv4Stack=true</string>
+    <string>-jar</string>
+    <string>start.jar</string>
+  </array>
+  <key>ServiceDescription</key>
+  <string>Apache Solr Server</string>
+  <key>StandardErrorPath</key>
+  <string>/path/to/ht_solr/repo/logs/solr-error.log</string>
+  <key>StandardOutPath</key>
+  <string>/path/to/ht_solr/repo/logs/solr-output.log</string>
+</dict>
+</plist>
