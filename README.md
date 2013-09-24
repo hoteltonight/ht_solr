@@ -12,3 +12,7 @@ Current entensions:
 ```
 HT_HOME=/path/to/rails/app ./htsolr
 ```
+
+## License
+
+ht_solr is released under the [MIT License](http://www.opensource.org/licenses/MIT).
